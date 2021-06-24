@@ -6,41 +6,60 @@
 /*   By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 03:00:43 by jisokang          #+#    #+#             */
-/*   Updated: 2021/06/23 19:50:04 by jisokang         ###   ########.fr       */
+/*   Updated: 2021/06/24 21:29:15 by jisokang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
 #include "../lib/include/libft.h"
+#include "../lib/include/ft_printf.h"
 #include <stdio.h>
+# define PID_MAX 32768
 // ./client 12345 abcde
 
-void	usage(void)
+void	err_usage(void)
 {
-	write(2, "Wrong argument! Please check usage.\nUsage: ./client [server PID] [string]\n", 75);
+	write(2, "Wrong argument! Please check usage.\n"
+		"Usage: ./client [server PID] [message]\n", 76);
+	exit(1);
+}
+
+void	err_pid(void)
+{
+	write(2, "Wrong PID Number.\n"
+		"If you want use extra PID, "
+		"plese check /proc/sys/kernel/pid_max\n", 83);
 	exit(1);
 }
 
 int	main(int argc, char **argv)
 {
-	int		pid;
-	char	*str;
-	int		c;
-	int		arr[8];
-	int		len;
-
+	unsigned int	pid;
+	unsigned int 	num;
+	unsigned int	result;
+	int		i;
+	int		j;
 	if (argc != 3)
-		usage();
+		err_usage();
 	pid = ft_atoi(argv[1]);
-	str = argv[2];
-	c	= str[0];
+	if (pid > PID_MAX)
+		err_pid();
 	printf("pid : %d\n", pid);
-	printf("str : %s\n", str);
-	printf("c : %d(", c);
-	len = ft_num_tobase(arr, c, 2);
-	while (len >= 0)
-		printf("%d", arr[len--]);
-	printf(")\n");
-
+	i = 0;
+	while (argv[2][i] != '\0')
+	{
+		j = 7;
+		while (j >= 0)
+		{
+			num = argv[2][i];
+			result = num >> j-- & 1;
+			if (result == 1)
+				kill(pid, SIGUSR1);
+			else if (result == 0)
+				kill(pid, SIGUSR2);
+			usleep(100);
+		}
+		i++;
+	}
 	return (0);
 }
