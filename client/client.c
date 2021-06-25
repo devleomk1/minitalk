@@ -6,7 +6,7 @@
 /*   By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 03:00:43 by jisokang          #+#    #+#             */
-/*   Updated: 2021/06/24 21:29:15 by jisokang         ###   ########.fr       */
+/*   Updated: 2021/06/25 22:27:57 by jisokang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	main(int argc, char **argv)
 		{
 			num = argv[2][i];
 			result = num >> j-- & 1;
-			if (result == 1)
+			if (result == 0)
 				kill(pid, SIGUSR1);
-			else if (result == 0)
+			else if (result == 1)
 				kill(pid, SIGUSR2);
 			usleep(100);
 		}
