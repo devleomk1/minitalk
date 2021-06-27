@@ -6,7 +6,7 @@
 /*   By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 03:01:14 by jisokang          #+#    #+#             */
-/*   Updated: 2021/06/27 20:37:52 by jisokang         ###   ########.fr       */
+/*   Updated: 2021/06/27 22:57:17 by jisokang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_msg
 	unsigned int	size;
 	int				flag;
 	unsigned int	cli_pid;
-	unsigned int	cli_pid_bk;
 }					t_msg;
 
 
