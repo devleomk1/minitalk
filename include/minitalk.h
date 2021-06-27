@@ -6,7 +6,7 @@
 /*   By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 03:01:14 by jisokang          #+#    #+#             */
-/*   Updated: 2021/06/22 03:34:24 by jisokang         ###   ########.fr       */
+/*   Updated: 2021/06/27 20:37:52 by jisokang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,27 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+# include "color.h"
+# include "../lib/include/libft.h"
+# include "../lib/include/ft_printf.h"
+
 # define TRUE	1
 # define FALSE	0
+# define PID_MIN 100
+# define PID_MAX 99999
+
+typedef struct s_msg
+{
+	char			c;
+	unsigned int	size;
+	int				flag;
+	unsigned int	cli_pid;
+	unsigned int	cli_pid_bk;
+}					t_msg;
+
+
+void	err_usage(void);
+void	err_pid(void);
+int		ft_atoi_mt(const char *str);
 
 #endif
