@@ -6,16 +6,15 @@
 /*   By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 14:23:05 by jisokang          #+#    #+#             */
-/*   Updated: 2021/06/28 17:12:09 by jisokang         ###   ########.fr       */
+/*   Updated: 2021/06/28 19:30:30 by jisokang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/minitalk.h"
 
 t_msg g_msg;
 
-void	init_msg(void)
+static void	init_msg(void)
 {
 	g_msg.c = 0;
 	g_msg.size = 0;
@@ -23,7 +22,7 @@ void	init_msg(void)
 	g_msg.pid = 0;
 }
 
-void	print_msg(void)
+static void	print_msg(void)
 {
 	if (g_msg.c == 0)
 	{
@@ -37,7 +36,7 @@ void	print_msg(void)
 	g_msg.size = 0;
 }
 
-void	sigusr_handler(int signo)
+static void	sigusr_handler(int signo)
 {
 	if (g_msg.size < 17 && g_msg.flag == TRUE)
 	{
@@ -58,8 +57,9 @@ void	sigusr_handler(int signo)
 		print_msg();
 }
 
-int		main(void)
+int			main(void)
 {
+	signal(SIGUSR1, sigusr_handler);
 	if ((signal(SIGUSR1, sigusr_handler) == SIG_ERR) ||
 	(signal(SIGUSR2, sigusr_handler) == SIG_ERR))
 	{
