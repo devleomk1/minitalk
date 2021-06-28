@@ -6,7 +6,7 @@
 /*   By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 03:00:53 by jisokang          #+#    #+#             */
-/*   Updated: 2021/06/27 23:06:47 by jisokang         ###   ########.fr       */
+/*   Updated: 2021/06/27 23:09:45 by jisokang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	sigusr_handler(int signo)
 		g_msg.cli_pid += ((signo & 1) << g_msg.size);
 		//if((signo & 1)) write(1, "1", 2);
 		//else write(1, "0", 2);
-		g_msg.size++;
+
 	}
 	else if (g_msg.size < 8 && g_msg.flag == FALSE)
 	{
@@ -41,8 +41,8 @@ void	sigusr_handler(int signo)
 		//if((signo & 1)) write(1, "1", 2);
 		//else write(1, "0", 2);
 		//ft_printf("-->%d<--\n", g_msg.c);
-		g_msg.size++;
 	}
+	g_msg.size++;
 
 	if (g_msg.size == 17 && g_msg.flag == TRUE)
 	{
