@@ -6,7 +6,7 @@
 /*   By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 03:00:43 by jisokang          #+#    #+#             */
-/*   Updated: 2021/06/27 23:06:14 by jisokang         ###   ########.fr       */
+/*   Updated: 2021/06/28 15:52:35 by jisokang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,33 @@
 
 static void	sigusr_handler(int signo)
 {
-	if(signo == SIGUSR1)
+	if (signo == SIGUSR1)
 		write(1, "✅ message sent check\n", 24);
 }
 
-void	send_pid(pid_t pid)
+static void	send_pid(pid_t pid)
 {
 	int i;
 	int bit;
 	int	client_pid;
 
 	client_pid = getpid();
-	ft_printf("./client PID : %d\n", client_pid);
+	ft_putstr_fd("./client PID : ", 1);
+	ft_putnbr_fd(client_pid, 1);
+	ft_putstr_fd("\n", 1);
 	i = 0;
 	while (i < 17)
 	{
 		bit = client_pid >> i++ & 1;
 		if (bit == 0)
 			kill(pid, SIGUSR1);
-		else
+		else if (bit == 1)
 			kill(pid, SIGUSR2);
 		usleep(50);
 	}
 }
 
-void	send_null(pid_t pid)
+static void	send_null(pid_t pid)
 {
 	int i;
 
@@ -46,19 +48,17 @@ void	send_null(pid_t pid)
 	while (i < 8)
 	{
 		kill(pid, SIGUSR1);
-		usleep(40);
+		usleep(50);
 		i++;
 	}
 }
 
-void	send_msg(pid_t pid, char *str)
+static void	send_msg(pid_t pid, char *str)
 {
 	int	i;
 	int	j;
 	int	bit;
 
-	send_pid(pid);
-	// server flag on
 	i = 0;
 	while (str[i] != '\0')
 	{
@@ -70,15 +70,13 @@ void	send_msg(pid_t pid, char *str)
 				kill(pid, SIGUSR1);
 			else if (bit == 1)
 				kill(pid, SIGUSR2);
-			usleep(40);
+			usleep(50);
 		}
 		i++;
 	}
-	send_null(pid);
-	// server flag off
 }
 
-int	main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	int	pid;
 
@@ -88,6 +86,8 @@ int	main(int argc, char **argv)
 	if (pid > PID_MAX || pid < PID_MIN)
 		err_pid();
 	signal(SIGUSR1, sigusr_handler);
+	send_pid(pid);
 	send_msg(pid, argv[2]);
+	send_null(pid);
 	return (0);
 }

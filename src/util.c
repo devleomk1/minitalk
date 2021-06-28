@@ -6,16 +6,16 @@
 /*   By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 15:41:08 by jisokang          #+#    #+#             */
-/*   Updated: 2021/06/27 15:51:51 by jisokang         ###   ########.fr       */
+/*   Updated: 2021/06/28 15:52:06 by jisokang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/minitalk.h"
 
 static int	ft_isspace(char c)
 {
-	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r' || c == ' ')
+	if (c == '\t' || c == '\n' || c == '\v' ||
+		c == '\f' || c == '\r' || c == ' ')
 		return (1);
 	else
 		return (0);
