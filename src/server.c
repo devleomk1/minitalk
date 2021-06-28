@@ -6,7 +6,7 @@
 /*   By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 03:00:53 by jisokang          #+#    #+#             */
-/*   Updated: 2021/06/28 19:30:19 by jisokang         ###   ########.fr       */
+/*   Updated: 2021/06/28 19:46:31 by jisokang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static void	sigusr_handler(int signo)
 
 int			main(void)
 {
-	signal(SIGUSR1, sigusr_handler);
 	if ((signal(SIGUSR1, sigusr_handler) == SIG_ERR) ||
 	(signal(SIGUSR2, sigusr_handler) == SIG_ERR))
 	{

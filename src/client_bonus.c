@@ -6,11 +6,11 @@
 /*   By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 14:23:02 by jisokang          #+#    #+#             */
-/*   Updated: 2021/06/28 17:11:59 by jisokang         ###   ########.fr       */
+/*   Updated: 2021/06/28 19:48:42 by jisokang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
+#include "../include/minitalk_bonus.h"
 
 static void	sigusr_handler(int signo)
 {
